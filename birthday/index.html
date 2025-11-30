@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Ha Linh</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:300italic');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Lato', sans-serif;
+    }
+    
+    .instruction {
+      color: #8b6a60;
+      font-weight: 700;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 3em;
+      animation: fadeIn 2s ease-in;
+    }
+    
+    .text {
+      color: #8b6a60;
+      font-weight: 300;
+      font-style: italic;
+      text-align: center;
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      display: none;
+    }
+    
+    .text.show {
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
+    
+    .text h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    
+    .text p {
+      font-size: 1.2em;
+      margin: 5px 0;
+    }
+    
+    #cake {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin-top: 30px;
+    }
+    
+    .layer {
+      position: absolute;
+      border-radius: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .layer-bottom {
+      width: 280px;
+      height: 80px;
+      background: #f4a460;
+      bottom: 0;
+      border: 3px solid #d2691e;
+    }
+    
+    .layer-middle {
+      width: 220px;
+      height: 80px;
+      background: #f4a460;
+      bottom: 75px;
+      border: 3px solid #d2691e;
+    }
+    
+    .layer-top {
+      width: 160px;
+      height: 80px;
+      background: #f4a460;
+      bottom: 150px;
+      border: 3px solid #d2691e;
+    }
+    
+    .velas {
+      background: #ffffff;
+      border-radius: 10px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      margin-left: -2.5px;
+      width: 5px;
+      height: 45px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    
+    .velas.blown {
+      animation: fadeOut 0.5s ease-out forwards;
+    }
+    
+    .velas:after,
+    .velas:before {
+      background: rgba(255, 0, 0, 0.4);
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+    }
+    
+    .velas:after {
+      top: 25%;
+      left: 0;
+    }
+    
+    .velas:before {
+      top: 45%;
+      left: 0;
+    }
+    
+    .fuego {
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      margin-left: -10px;
+      width: 20px;
+      height: 50px;
+      opacity: 0;
+      background: linear-gradient(to top, #ff6b00 0%, #ffa500 30%, #ffff00 60%, rgba(255, 255, 255, 0.8) 100%);
+      transform-origin: bottom center;
+    }
+    
+    .fuego.lit:nth-child(1) {
+      animation: flame1 0.6s 0.5s infinite ease-in-out;
+    }
+    
+    .fuego.lit:nth-child(2) {
+      animation: flame2 0.5s 0.5s infinite ease-in-out;
+    }
+    
+    .fuego.lit:nth-child(3) {
+      animation: flame3 0.7s 0.5s infinite ease-in-out;
+    }
+    
+    .fuego.lit:nth-child(4) {
+      animation: flame4 0.4s 0.5s infinite ease-in-out;
+    }
+    
+    .fuego.blown {
+      animation: blowOut 0.3s ease-out forwards !important;
+    }
+    
+    .smoke {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      margin-left: -15px;
+      width: 30px;
+      height: 30px;
+      background: rgba(150, 150, 150, 0.5);
+      border-radius: 50%;
+      opacity: 0;
+    }
+    
+    .smoke.active {
+      animation: smokeRise 2s ease-out forwards;
+    }
+    
+    @keyframes flame1 {
+      0%, 100% {
+        opacity: 1;
+        transform: scaleY(1) scaleX(1) translateX(-2px) rotate(-3deg);
+        filter: blur(0px);
+      }
+      25% {
+        opacity: 0.95;
+        transform: scaleY(1.1) scaleX(0.95) translateX(1px) rotate(2deg);
+        filter: blur(0.5px);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleY(0.9) scaleX(1.05) translateX(-1px) rotate(-2deg);
+        filter: blur(0px);
+      }
+      75% {
+        opacity: 0.92;
+        transform: scaleY(1.05) scaleX(0.98) translateX(2px) rotate(3deg);
+        filter: blur(0.5px);
+      }
+    }
+    
+    @keyframes flame2 {
+      0%, 100% {
+        opacity: 0.95;
+        transform: scaleY(1.05) scaleX(0.95) translateX(1px) rotate(2deg);
+        filter: blur(0.5px);
+      }
+      33% {
+        opacity: 1;
+        transform: scaleY(0.95) scaleX(1.02) translateX(-2px) rotate(-3deg);
+        filter: blur(0px);
+      }
+      66% {
+        opacity: 0.9;
+        transform: scaleY(1.1) scaleX(0.9) translateX(1px) rotate(1deg);
+        filter: blur(0.5px);
+      }
+    }
+    
+    @keyframes flame3 {
+      0%, 100% {
+        opacity: 1;
+        transform: scaleY(0.95) scaleX(1.03) translateX(2px) rotate(-1deg);
+        filter: blur(0px);
+      }
+      30% {
+        opacity: 0.93;
+        transform: scaleY(1.08) scaleX(0.92) translateX(-1px) rotate(3deg);
+        filter: blur(0.5px);
+      }
+      60% {
+        opacity: 1;
+        transform: scaleY(1) scaleX(1) translateX(0px) rotate(-2deg);
+        filter: blur(0px);
+      }
+    }
+    
+    @keyframes flame4 {
+      0%, 100% {
+        opacity: 0.9;
+        transform: scaleY(1.1) scaleX(0.9) translateX(-1px) rotate(2deg);
+        filter: blur(0.5px);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleY(0.95) scaleX(1.05) translateX(2px) rotate(-3deg);
+        filter: blur(0px);
+      }
+    }
+    
+    @keyframes blowOut {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateX(20px) translateY(-5px) scale(0.5);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateX(30px) translateY(-10px) scale(0);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes smokeRise {
+      0% {
+        opacity: 0.8;
+        transform: translateY(0) scale(0.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(2);
+      }
+    }
+    
+    @keyframes slideIn {
+      to {
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+      }
+    }
+    
+    .frosting {
+      position: absolute;
+      width: 100%;
+      height: 15px;
+      background: #fff;
+      border-radius: 50%;
+      top: -7px;
+    }
+    
+
+    
+    .blow-button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-family: 'Lato', sans-serif;
+      font-style: italic;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s 1s ease-in forwards;
+    }
+    
+    .blow-button:hover {
+      background: #ff1493;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .blow-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .status {
+      margin-top: 15px;
+      color: #8b6a60;
+      font-style: italic;
+      font-size: 1.1em;
+      min-height: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="instruction">Happy Birthday Em Hà Linh </div>
+
+  <div id="cake">
+    <div class="velas">
+      <div class="fuego"></div>
+      <div class="fuego"></div>
+      <div class="fuego"></div>
+      <div class="fuego"></div>
+      <div class="smoke"></div>
+    </div>
+    
+    <div class="layer layer-top">
+      <div class="frosting"></div>
+    </div>
+    
+    <div class="layer layer-middle">
+      <div class="frosting"></div>
+    </div>
+    
+    <div class="layer layer-bottom">
+      <div class="frosting"></div>
+    </div>
+  </div>
+  
+  <button class="blow-button" id="blowButton">Blow Out the Candle</button>
+  <div class="status" id="status"></div>
+  <button class="blow-button" id="flowerButton" style="display:none;">
+  Open Your Flowers
+</button>
+  
+  
+  <div class="text" id="wishText">
+    <h1>Make a Wish!</h1>
+    <p>Wishing you endless health and happiness</p>
+    <p>May all your dreams come true!</p>
+  </div>
+
+  <script>
+    let audioContext;
+    let analyser;
+    let microphone;
+    let dataArray;
+    let isListening = false;
+    let candleLit = false;
+    let blowCount = 0;
+    const requiredBlows = 3;
+    
+    const blowButton = document.getElementById('blowButton');
+    const status = document.getElementById('status');
+    const flames = document.querySelectorAll('.fuego');
+    const candle = document.querySelector('.velas');
+    const smoke = document.querySelector('.smoke');
+    const wishText = document.getElementById('wishText');
+  
+  
+    
+    // Light the candle immediately
+    setTimeout(() => {
+      flames.forEach(flame => flame.classList.add('lit'));
+      candleLit = true;
+    }, 500);
+    
+    blowButton.addEventListener('click', async () => {
+      if (!candleLit) return;
+      document.getElementById('flowerButton').addEventListener('click', () => {
+  window.location.href = 'Flower-animation/FLORES.html';
+});
+
+
+      
+      try {
+        blowButton.disabled = true;
+        status.textContent = 'Requesting microphone access... Please allow when prompted.';
+        
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true
+          } 
+        });
+        
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
+        
+        analyser.fftSize = 512;
+        analyser.smoothingTimeConstant = 0.3;
+        const bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        
+        microphone.connect(analyser);
+        
+        isListening = true;
+        status.textContent = 'Listening... Blow into your microphone!';
+        
+        detectBlow();
+        
+      } catch (error) {
+        console.error('Microphone access error:', error);
+        
+        let errorMessage = '';
+        if (error.name === 'NotAllowedError') {
+          errorMessage = 'Microphone access was blocked. Please allow microphone access in your browser settings, or simply click the button/candle to blow it out.';
+        } else if (error.name === 'NotFoundError') {
+          errorMessage = 'No microphone found. Click the button or candle to blow it out instead.';
+        } else if (error.name === 'NotReadableError') {
+          errorMessage = 'Microphone is being used by another app. Click the button or candle to blow it out.';
+        } else {
+          errorMessage = 'Could not access microphone. Click the button or candle to blow it out instead.';
+        }
+        
+        status.textContent = errorMessage;
+        blowButton.disabled = false;
+        blowButton.textContent = 'Blow Out the Candle';
+        
+        // Fallback: click to blow
+        candle.style.cursor = 'pointer';
+        const blowHandler = () => {
+          blowOutCandle();
+          candle.removeEventListener('click', blowHandler);
+        };
+        candle.addEventListener('click', blowHandler);
+        
+        blowButton.onclick = () => {
+          blowOutCandle();
+        };
+      }
+    });
+    
+    function detectBlow() {
+      if (!isListening) return;
+      
+      analyser.getByteFrequencyData(dataArray);
+      
+      // Calculate average volume across all frequencies
+      let sum = 0;
+      for (let i = 0; i < dataArray.length; i++) {
+        sum += dataArray[i];
+      }
+      const average = sum / dataArray.length;
+      
+      // Focus on low frequencies (blow sound is typically in lower range)
+      let lowFreqSum = 0;
+      const lowFreqCount = Math.floor(dataArray.length / 3);
+      for (let i = 0; i < lowFreqCount; i++) {
+        lowFreqSum += dataArray[i];
+      }
+      const lowFreqAverage = lowFreqSum / lowFreqCount;
+      
+      // Log for debugging (you can remove this later)
+      if (Math.random() < 0.1) { // Log occasionally to avoid spam
+        console.log('Average volume:', average, 'Low freq:', lowFreqAverage);
+      }
+      
+      // Detect blow - VERY HIGH thresholds requiring a strong blow
+      if (average > 120 || lowFreqAverage > 150) {
+        console.log('Blow detected! Average:', average, 'Low freq:', lowFreqAverage);
+        blowCount++;
+        status.textContent = `${blowCount}/${requiredBlows} ${requiredBlows - blowCount > 0 ? '' : ''}`;
+        
+        // Temporarily stop listening to avoid double-counting the same blow
+        isListening = false;
+        
+        if (blowCount >= requiredBlows) {
+          blowOutCandle();
+          return;
+        } else {
+          // Resume listening after a short delay
+          setTimeout(() => {
+            isListening = true;
+            detectBlow();
+          }, 1000);
+          return;
+        }
+      }
+      
+      requestAnimationFrame(detectBlow);
+    }
+    
+    function blowOutCandle() {
+      if (!candleLit) return;
+      
+      isListening = false;
+      candleLit = false;
+      blowCount = 0;
+      
+      // Stop microphone
+      if (microphone) {
+        microphone.disconnect();
+        if (audioContext) audioContext.close();
+      }
+      
+      status.textContent = 'May All Your Wishes Come True. I love you from Rua <3';
+      
+      // Blow out animation
+      flames.forEach(flame => {
+        flame.classList.remove('lit');
+        flame.classList.add('blown');
+      });
+      
+      // Show smoke
+      smoke.classList.add('active');
+      
+      // Fade out candle
+      setTimeout(() => {
+        candle.classList.add('blown');
+      }, 300);
+      
+      // Show wish text
+      setTimeout(() => {
+        wishText.classList.add('show');
+      }, 800);
+      
+      blowButton.style.display = 'none';
+      // Show the flower button after candle is blown out
+setTimeout(() => {
+  const flowerButton = document.getElementById('flowerButton');
+  flowerButton.style.display = 'inline-block';
+  flowerButton.style.opacity = 0;
+  
+  // Smooth fade-in
+  setTimeout(() => {
+    flowerButton.style.transition = 'opacity 1.5s ease';
+    flowerButton.style.opacity = 1;
+  }, 50);
+}, 1200);
+
+    }
+  </script>
+</body>
+</html>
